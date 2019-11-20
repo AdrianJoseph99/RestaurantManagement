@@ -1,8 +1,8 @@
 /**
- * Items to be placed on the menui
+ * Write a description of class MenuItem here.
  *
  * @author Adrian
- * @version (a version number or a date)
+ * 
  */
 public class MenuItem
 {
@@ -17,12 +17,6 @@ public class MenuItem
         this.price = price;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     public String getName()
     {
         return name;
