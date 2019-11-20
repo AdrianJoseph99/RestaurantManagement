@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.util.ArrayList;
 import java.util.Queue;
+
 import java.util.Scanner;
 public class RestaurantManagementSystem{
   Scanner input = new Scanner(System.in);
@@ -21,6 +22,4 @@ public class RestaurantManagementSystem{
       tables.add(obj);
     }
   }
-
-
 }
