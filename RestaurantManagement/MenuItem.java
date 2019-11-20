@@ -1,7 +1,7 @@
 /**
- * Write a description of class MenuItem here.
+ * Items to be placed on the menui
  *
- * @author (your name)
+ * @author Adrian
  * @version (a version number or a date)
  */
 public class MenuItem
