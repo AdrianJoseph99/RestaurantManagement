@@ -1,0 +1,17 @@
+Example Menu(IDK why I went Italian):
+Spaghetti - 11.00
+Tortellini - 13.00
+Ravioli - 12.00
+Lasagna - 15.00
+
+Pizza - 10.00
+Calzone - 8.00
+Panini - 8.00
+
+Caesar Salad - 6.00
+Soup of the Day - 6.00
+
+Bottled Water - 1.00
+Wine - 20.00
+Beer - 6.00
+Soda - 1.25
