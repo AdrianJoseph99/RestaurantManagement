@@ -36,7 +36,7 @@ public class RestaurantManagementSystem implements ActionListener{
   }
   
   public void actionPerformed(ActionEvent e){
-    
+    //idk
   }
   
   public void addServer(){
@@ -50,7 +50,7 @@ public class RestaurantManagementSystem implements ActionListener{
     server.add(empPW);
     server.add(submit);
     server.setLayout(new FlowLayout());
-    server.setSize(400,400);
+    server.setSize(300,300);
     server.setVisible(true);
     submit.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
@@ -79,6 +79,14 @@ public class RestaurantManagementSystem implements ActionListener{
     managers.add(temp);
   }
   
+  public void addMenuItem(){
+    String name = JOptionPane.showInputDialog("Item name?");
+    double price = Double.parseDouble(JOptionPane.showInputDialog("Item price?"));
+    String category = JOptionPane.showInputDialog("Item category: Drink or Food?");
+    MenuItem food = new MenuItem(name, price, category);
+    menu.add(food);
+  }
+  
   public boolean signIn(){
     String tempPW = JOptionPane.showInputDialog("Login with your pin");
     for(Manager x:managers){
@@ -97,15 +105,50 @@ public class RestaurantManagementSystem implements ActionListener{
     return false;
   }
   
-  public static void main(String[] args){
-    //sign in --> server or manager?
-    //Server: seating(how many people?) or ordering(for which table)?
-    //manager: seating or ordering or looking at info?
-    //
-    RestaurantManagementSystem res1 = new RestaurantManagementSystem();
+  public void sendToKitchen(){
+    //drinks vs foods?
+  }
+  
+  public void addToOrder(){
     
+  }
+  
+  public static void main(String[] args){
+    RestaurantManagementSystem res1 = new RestaurantManagementSystem();
+    menu = new ArrayList<MenuItem>();
+    //to save time on other stuff, but there is still the option of adding later on
+    MenuItem spag = new MenuItem("Spaghetti",11,"Food");
+    menu.add(spag);
+    MenuItem tor = new MenuItem("Tortellini",13,"Food");
+    menu.add(tor);
+    MenuItem rav = new MenuItem("Ravioli",12,"Food");
+    menu.add(rav);
+    MenuItem las = new MenuItem("Lasagna",15,"Food");
+    menu.add(las);
+    MenuItem pi = new MenuItem("Pizza",10,"Food");
+    menu.add(pi);
+    MenuItem cal = new MenuItem("Calzone",8,"Food");
+    menu.add(cal);
+    MenuItem pan = new MenuItem("Panini",8,"Food");
+    menu.add(pan);
+    MenuItem ca = new MenuItem("Caesar Salad",6,"Food");
+    menu.add(ca);
+    MenuItem so = new MenuItem("Soup of the Day",6,"Food");
+    menu.add(so);
+    MenuItem bo = new MenuItem("Bottled Water",1,"Drink");
+    menu.add(bo);
+    MenuItem wi = new MenuItem("Wine",20,"Drink");
+    menu.add(wi);
+    MenuItem be = new MenuItem("Beer",6,"Drink");
+    menu.add(be);
+    MenuItem sod = new MenuItem("Soda",1.25,"Drink");
+    menu.add(sod);
     boolean Login = res1.signIn();
-    if(Login == true){
+    if(Login == true){//open up the main screen with all tables
+      JFrame RMS = new JFrame("Restaurant Management System");
+      RMS.setLayout(new FlowLayout());
+      RMS.setSize(1000,1000);
+      RMS.setVisible(true);
       
     }
   }
