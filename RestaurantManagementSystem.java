@@ -161,7 +161,7 @@ public class RestaurantManagementSystem{
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
-      //add the tables as tabs?
+      //add the tables as tabs
       JTabbedPane pane = new JTabbedPane();
       for(int i=0;i<tablesArray.size();i++){
         String temp = "Table "+Integer.toString(i+1);
