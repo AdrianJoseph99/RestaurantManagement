@@ -7,9 +7,9 @@ public class Server extends Employee {
         tablesPerServer = 0;
     }
 
-    public Server(int password, String firstN, String lastN, int tablesPerServer){
+    public Server(int password, String firstN, String lastN){
         super(password, firstN, lastN);
-        this.tablesPerServer = tablesPerServer;
+        //this.tablesPerServer = tablesPerServer;
     }
 
     public int getTablesPerServer() {

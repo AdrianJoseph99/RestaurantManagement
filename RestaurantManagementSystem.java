@@ -3,16 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.LinkedList;
 
 import java.util.Scanner;
 public class RestaurantManagementSystem implements ActionListener{
   Scanner input = new Scanner(System.in);
-  public static ArrayList<Table> tablesArray;
-  public static ArrayList<Server> servers;
-  public static ArrayList<Manager> managers;
-  public static ArrayList<MenuItem> menu;
-  public static Queue<Order> toKitchen;
-  public static Queue<Order> fromKitchen;
+  public static ArrayList<Table> tablesArray = new ArrayList<Table>();
+  public static ArrayList<Server> servers = new ArrayList<Server>();
+  public static ArrayList<Manager> managers = new ArrayList<Manager>();
+  public static ArrayList<MenuItem> menu = new ArrayList<MenuItem>();;
+  public static Queue<Order> toKitchen = new LinkedList<Order>();
+  public static Queue<Order> fromKitchen = new LinkedList<Order>();
   public int masterPassW;
   
   public RestaurantManagementSystem(){
@@ -24,15 +25,16 @@ public class RestaurantManagementSystem implements ActionListener{
       Table obj = new Table(i+1,seats);
       tablesArray.add(obj);
     }
-    int numWorkers = Integer.parseInt(JOptionPane.showInputDialog("How many employees have you hired?"));
-    int numServers = Integer.parseInt(JOptionPane.showInputDialog("How many are servers?"));
-    for(int i=0; i<numServers;i++){
-      this.addServer();     
-    }
-    int numManagers = Integer.parseInt(JOptionPane.showInputDialog("How many are managers?"));
+    //int numWorkers = Integer.parseInt(JOptionPane.showInputDialog("How many employees have you hired?"));
+    int numManagers = Integer.parseInt(JOptionPane.showInputDialog("How many managers have you hired?"));
     for(int i=0;i<numManagers;i++){
       this.addManager();
     }
+    int numServers = Integer.parseInt(JOptionPane.showInputDialog("How many servers have you hired?"));
+    for(int i=0;i<numServers;i++){
+      this.addServer();     
+    }
+    
   }
   
   public void actionPerformed(ActionEvent e){
@@ -40,7 +42,7 @@ public class RestaurantManagementSystem implements ActionListener{
   }
   
   public void addServer(){
-    JFrame server = new JFrame("Server");
+    /*JFrame server = new JFrame("Server");
     JTextField fName = new JTextField("First Name");
     JTextField lName = new JTextField("Last Name");
     JTextField empPW = new JTextField("4 digit pin");
@@ -59,10 +61,12 @@ public class RestaurantManagementSystem implements ActionListener{
           servers.add(temp);
         }
       }
-    });
-    /*String fName = JOptionPane.showInputDialog("First Name?");
-    String lName = JOptionPane.showInputDialog("Last Name?");
-    int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));*/
+   });*/
+    String fName = JOptionPane.showInputDialog("First Name");
+    String lName = JOptionPane.showInputDialog("Last Name");
+    int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
+    Server temp = new Server(empPW, fName, lName);
+    servers.add(temp);
   }
   public void addManager(){
     String fName = JOptionPane.showInputDialog("First Name?");
@@ -115,7 +119,6 @@ public class RestaurantManagementSystem implements ActionListener{
   
   public static void main(String[] args){
     RestaurantManagementSystem res1 = new RestaurantManagementSystem();
-    menu = new ArrayList<MenuItem>();
     //to save time on other stuff, but there is still the option of adding later on
     MenuItem spag = new MenuItem("Spaghetti",11,"Food");
     menu.add(spag);
@@ -144,10 +147,13 @@ public class RestaurantManagementSystem implements ActionListener{
     MenuItem sod = new MenuItem("Soda",1.25,"Drink");
     menu.add(sod);
     boolean Login = res1.signIn();
-    if(Login == true){//open up the main screen with all tables
+    if(Login == true){
+      //open up the main screen with all tables
       JFrame RMS = new JFrame("Restaurant Management System");
       RMS.setLayout(new FlowLayout());
-      RMS.setSize(1000,1000);
+      RMS.setLocationRelativeTo(null);
+      RMS.setSize(1000,900);
+      RMS.pack();
       RMS.setVisible(true);
       
     }
