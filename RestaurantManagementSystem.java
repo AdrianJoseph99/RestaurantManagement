@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 import java.util.Scanner;
-public class RestaurantManagementSystem implements ActionListener{
+public class RestaurantManagementSystem{
   Scanner input = new Scanner(System.in);
   public static ArrayList<Table> tablesArray = new ArrayList<Table>();
   public static ArrayList<Server> servers = new ArrayList<Server>();
@@ -15,10 +15,19 @@ public class RestaurantManagementSystem implements ActionListener{
   public static ArrayList<JButton> tableButtons = new ArrayList<JButton>();
   public static Queue<Order> toKitchen = new LinkedList<Order>();
   public static Queue<Order> fromKitchen = new LinkedList<Order>();
-  public int masterPassW;
+  public int masterPassW = 0;
   
   public RestaurantManagementSystem(){
     masterPassW = Integer.parseInt(JOptionPane.showInputDialog("set a master pin of 4 digits"));
+    while(masterPassW>9999||masterPassW<1000){
+      try{
+        masterPassW = Integer.parseInt(JOptionPane.showInputDialog("please enter valid pin of 4 digits"));
+      }
+      catch(Exception e){
+        JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
+        masterPassW = 0;
+      }
+    }
     int tables = Integer.parseInt(JOptionPane.showInputDialog("How many tables will you need?"));
     tablesArray = new ArrayList<Table>(tables);
     for(int i=0;i<tables;i++){
@@ -35,11 +44,6 @@ public class RestaurantManagementSystem implements ActionListener{
       this.addServer();     
     }
     
-  }
-  
-  @Override
-  public void actionPerformed(ActionEvent e){
-    //open new panel or new section
   }
   
   public void addServer(){
@@ -115,7 +119,7 @@ public class RestaurantManagementSystem implements ActionListener{
   }
   
   public void addToOrder(){
-    
+    // add an order to order list and send it into kitchen
   }
   
   public static void main(String[] args){
@@ -151,31 +155,20 @@ public class RestaurantManagementSystem implements ActionListener{
     if(Login == true){
       //open up the main screen with all tables
       JFrame frame = new JFrame("Restaurant Management System");
-      JPanel panel1 = new JPanel();
-      JPanel panel2 = new JPanel();
-      panel1.setBackground(Color.BLUE);
-      panel2.setBackground(Color.RED);
-      JMenuBar bar = new JMenuBar();
-      JMenu file = new JMenu("File");
-      bar.add(file);
-      for(int i=0;i<tablesArray.size();i++){
-        String temp = "Table"+Integer.toString(i+1);
-        JButton button = new JButton(temp);
-        panel1.add(button);
-      }
-      JButton kitchenView = new JButton("Kitchen");
-      panel2.add(kitchenView);
-      frame.add(bar);
-      frame.add(panel1);
-      frame.add(panel2);
-      frame.setLayout(new GridLayout(1,2));
-      
+      frame.setLayout(new GridLayout(1,1));
       frame.setLocationRelativeTo(null);
       frame.setPreferredSize(new Dimension(600,400));
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
-      
+      //add the tables as tabs?
+      JTabbedPane pane = new JTabbedPane();
+      for(int i=0;i<tablesArray.size();i++){
+        String temp = "Table "+Integer.toString(i+1);
+        pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
+      }
+      pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
+      frame.getContentPane().add(pane);
     }
   }
 }
