@@ -18,7 +18,7 @@ public class Order {
     
   
   public void setTimeOfOrder(Calendar timeOfOrder) {
-    this.timeOfOrder = timeOfOrder;
+    this.timeOfOrder = Calendar.getInstance();
   }
   public void setTableNumber(int tableNumber) {
     this.tableNumber = tableNumber;
