@@ -11,7 +11,8 @@ public class RestaurantManagementSystem implements ActionListener{
   public static ArrayList<Table> tablesArray = new ArrayList<Table>();
   public static ArrayList<Server> servers = new ArrayList<Server>();
   public static ArrayList<Manager> managers = new ArrayList<Manager>();
-  public static ArrayList<MenuItem> menu = new ArrayList<MenuItem>();;
+  public static ArrayList<MenuItem> menu = new ArrayList<MenuItem>();
+  public static ArrayList<JButton> tableButtons = new ArrayList<JButton>();
   public static Queue<Order> toKitchen = new LinkedList<Order>();
   public static Queue<Order> fromKitchen = new LinkedList<Order>();
   public int masterPassW;
@@ -25,7 +26,6 @@ public class RestaurantManagementSystem implements ActionListener{
       Table obj = new Table(i+1,seats);
       tablesArray.add(obj);
     }
-    //int numWorkers = Integer.parseInt(JOptionPane.showInputDialog("How many employees have you hired?"));
     int numManagers = Integer.parseInt(JOptionPane.showInputDialog("How many managers have you hired?"));
     for(int i=0;i<numManagers;i++){
       this.addManager();
@@ -37,8 +37,9 @@ public class RestaurantManagementSystem implements ActionListener{
     
   }
   
+  @Override
   public void actionPerformed(ActionEvent e){
-    //idk
+    //open new panel or new section
   }
   
   public void addServer(){
@@ -149,12 +150,31 @@ public class RestaurantManagementSystem implements ActionListener{
     boolean Login = res1.signIn();
     if(Login == true){
       //open up the main screen with all tables
-      JFrame RMS = new JFrame("Restaurant Management System");
-      RMS.setLayout(new FlowLayout());
-      RMS.setLocationRelativeTo(null);
-      RMS.setSize(1000,900);
-      RMS.pack();
-      RMS.setVisible(true);
+      JFrame frame = new JFrame("Restaurant Management System");
+      JPanel panel1 = new JPanel();
+      JPanel panel2 = new JPanel();
+      panel1.setBackground(Color.BLUE);
+      panel2.setBackground(Color.RED);
+      JMenuBar bar = new JMenuBar();
+      JMenu file = new JMenu("File");
+      bar.add(file);
+      for(int i=0;i<tablesArray.size();i++){
+        String temp = "Table"+Integer.toString(i+1);
+        JButton button = new JButton(temp);
+        panel1.add(button);
+      }
+      JButton kitchenView = new JButton("Kitchen");
+      panel2.add(kitchenView);
+      frame.add(bar);
+      frame.add(panel1);
+      frame.add(panel2);
+      frame.setLayout(new GridLayout(1,2));
+      
+      frame.setLocationRelativeTo(null);
+      frame.setPreferredSize(new Dimension(600,400));
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.pack();
+      frame.setVisible(true);
       
     }
   }
