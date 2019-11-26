@@ -7,7 +7,7 @@ public class Order {
   protected ArrayList<MenuItem> order;
   protected Calendar timeOfOrder;
   
-  public Order(int tableNumber, ArrayList<MenuItem> order, Calendar timeOfOrder) {
+  public Order(int tableNumber) {
     this.tableNumber = tableNumber;
     this.order = order;
     this.timeOfOrder = Calendar.getInstance();
@@ -15,7 +15,6 @@ public class Order {
   
   public Order() {
   }
-    
   
   public void setTimeOfOrder(Calendar timeOfOrder) {
     this.timeOfOrder = Calendar.getInstance();
@@ -34,6 +33,30 @@ public class Order {
   }
   public ArrayList<MenuItem> getOrder() {
     return this.order;
+  }
+  
+  public void addMenuItem(MenuItem item) {
+    order.add(item);
+  }
+  public void removeMenuItem(MenuItem item) {
+    order.remove(item);
+  }
+  public void printOrder(ArrayList<MenuItem> order) {
+    String name;
+    double cost;
+    for (MenuItem item : order) {
+      name = item.getName();
+      cost = item.getPrice();
+      System.out.printf("%s" + ", $" + "%.2f" + "\n", name, cost);
+    }
+  }
+  
+  public void printTotal(ArrayList<MenuItem> order) {
+    double total = 0;
+    for (MenuItem item : order) {
+      total += item.getPrice();
+    }
+    System.out.printf("Total Cost = $" + "%.2f" + "\n", total);
   }
   
   public double calculateTotal(ArrayList<MenuItem> order) {
