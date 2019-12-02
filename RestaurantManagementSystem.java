@@ -10,6 +10,7 @@ public class RestaurantManagementSystem{
   Scanner input = new Scanner(System.in);
   public static ArrayList<Table> tablesArray = new ArrayList<Table>();
   public static ArrayList<Server> servers = new ArrayList<Server>();
+  public static ArrayList<Chef> chefs = new ArrayList<>();
   public static ArrayList<Manager> managers = new ArrayList<Manager>();
   public static ArrayList<MenuItem> menu = new ArrayList<MenuItem>();
   public static ArrayList<JButton> tableButtons = new ArrayList<JButton>();
@@ -43,7 +44,10 @@ public class RestaurantManagementSystem{
     for(int i=0;i<numServers;i++){
       this.addServer();     
     }
-    
+    int numChefs = Integer.parseInt((JOptionPane.showInputDialog("How many chefs have you hired?")));
+    for(int i = 0; i < numChefs; i++){
+      this.addChef();
+    }
   }
   
   public void addServer(){
@@ -87,7 +91,13 @@ public class RestaurantManagementSystem{
     Manager temp = new Manager(manPW, fName, LName, Integer.parseInt(masterP));
     managers.add(temp);
   }
-  
+  public void addChef(){
+    String fName = JOptionPane.showInputDialog("First Name");
+    String lName = JOptionPane.showInputDialog("Last Name");
+    int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
+    Chef temp = new Chef(empPW, fName, lName);
+    chefs.add(temp);
+  }
   public void addMenuItem(){
     String name = JOptionPane.showInputDialog("Item name?");
     double price = Double.parseDouble(JOptionPane.showInputDialog("Item price?"));
@@ -118,8 +128,17 @@ public class RestaurantManagementSystem{
     //drinks vs foods?
   }
   
-  public void addToOrder(){
-    // add an order to order list and send it into kitchen
+  public static void addToOrder(int tableNumber){
+    Order order = new Order(tableNumber);
+    JTextArea  JTA = new JTextArea(menu.toString());
+    JPanel jp = new JPanel();
+    jp.add(JTA);
+    String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
+    for(MenuItem a : menu){
+      if(a.getName().equals(tempO)){
+        order.addMenuItem(a);
+      }
+    }
   }
   
   public static void main(String[] args){
@@ -161,6 +180,19 @@ public class RestaurantManagementSystem{
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
+      
+      JButton jb = new JButton("Add item to order");
+      jb.setBounds(140,100,120,40);
+      jb.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          addToOrder(1);
+        }
+      });
+      //add the tables as tabs
+      JTabbedPane pane = new JTabbedPane();
+      JPanel panel = new JPanel();
+      panel.add(jb);
       //add the tables as tabs
       JTabbedPane pane = new JTabbedPane();
       for(int i=0;i<tablesArray.size();i++){
