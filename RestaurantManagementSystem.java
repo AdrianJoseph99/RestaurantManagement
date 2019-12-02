@@ -135,11 +135,11 @@ public class RestaurantManagementSystem{
     /*  
     public void sendToKitchen(){
     //drinks vs foods?
-    }
+    }*/
 
     public void getFromKitchen(){
-
-    }*/
+        toKitchen.poll();
+    }
 
     public static void addToOrder(int tableNumber){
         Order order = new Order(tableNumber);
@@ -153,6 +153,7 @@ public class RestaurantManagementSystem{
             }
         }
         toKitchen.add(order);
+
     }
 
     public static void main(String[] args){
@@ -200,7 +201,12 @@ public class RestaurantManagementSystem{
             jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        addToOrder(1);
+                        for(int i = 0; i<tablesArray.size();i++){
+                            if(tablesArray.get(i).getAvail()){
+                                addToOrder(i);
+                                tablesArray.get(i).setAvail(false);
+                            }
+                        }
                     }
                 });
             //add the tables as tabs
