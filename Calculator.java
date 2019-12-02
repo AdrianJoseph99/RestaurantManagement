@@ -6,7 +6,7 @@ public class Calculator {
   private double tips;
   private double tax;
   
-  public Calculator(double revenue, double profit, double cost, double tips, double tax) {
+  public Calculator() {
     this.revenue = revenue;
     this.profit = profit;
     this.cost = cost;
