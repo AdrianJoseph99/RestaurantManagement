@@ -1,28 +1,24 @@
 /**
- * Items to be placed on the menui
+ * Write a description of class MenuItem here.
  *
  * @author Adrian
- * @version (a version number or a date)
+ * 
  */
 public class MenuItem
 {
     protected double price;
     protected String name;
+    protected String category;
     /**
      * Constructor for objects of class MenuItem
      */
-    public MenuItem(String name, double price)
+    public MenuItem(String name, double price, String category)
     {
         this.name = name;
         this.price = price;
+        this.category = category;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     public String getName()
     {
         return name;
@@ -30,8 +26,12 @@ public class MenuItem
 
     public double getPrice()
     {
-
         return price;
+    }
+    
+    public String getCategory()
+    {
+      return category;
     }
 
     public void setName(String name)
@@ -42,5 +42,9 @@ public class MenuItem
     public void setPrice(double price)
     {
         this.price = price;
+    }
+    public void setCategory(String category)
+    {
+      this.category = category;
     }
 }

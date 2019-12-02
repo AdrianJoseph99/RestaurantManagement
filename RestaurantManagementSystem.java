@@ -48,7 +48,6 @@ public class RestaurantManagementSystem{
     for(int i = 0; i < numChefs; i++){
       this.addChef();
     }
-    
   }
   
   public void addServer(){
@@ -92,7 +91,6 @@ public class RestaurantManagementSystem{
     Manager temp = new Manager(manPW, fName, LName, Integer.parseInt(masterP));
     managers.add(temp);
   }
-
   public void addChef(){
     String fName = JOptionPane.showInputDialog("First Name");
     String lName = JOptionPane.showInputDialog("Last Name");
@@ -100,7 +98,6 @@ public class RestaurantManagementSystem{
     Chef temp = new Chef(empPW, fName, lName);
     chefs.add(temp);
   }
-  
   public void addMenuItem(){
     String name = JOptionPane.showInputDialog("Item name?");
     double price = Double.parseDouble(JOptionPane.showInputDialog("Item price?"));
@@ -183,7 +180,7 @@ public class RestaurantManagementSystem{
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.pack();
       frame.setVisible(true);
-
+      
       JButton jb = new JButton("Add item to order");
       jb.setBounds(140,100,120,40);
       jb.addActionListener(new ActionListener() {
@@ -196,13 +193,14 @@ public class RestaurantManagementSystem{
       JTabbedPane pane = new JTabbedPane();
       JPanel panel = new JPanel();
       panel.add(jb);
+      //add the tables as tabs
+      JTabbedPane pane = new JTabbedPane();
       for(int i=0;i<tablesArray.size();i++){
         String temp = "Table "+Integer.toString(i+1);
         pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
       }
       pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
       frame.getContentPane().add(pane);
-
     }
   }
 }

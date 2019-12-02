@@ -1,0 +1,5 @@
+The aim of this project is to create a restaurant management system that will use user input to set up the system, and then allow the user to keep track of table availability, orders per table, and set up a queue from the table to the kitchen, and then another queue from the kitchen to the table.
+There will be 3 layers of access ranging from the owner who will have full access to all information, manager who will have access to the records of tips and will be allowed to add discounts or remove items from orders, and the employees/waiters will only be allowed access to the tables and orders for each table.
+We will be using JPanel, JFrame, JButtons, etc for a better integrated graphics system that will be more user friendly.
+
+Currently we have set up the objects for employees, menu itmes, tables, and the calculator that will calculate tip and profit based on revenue and cost per day. The main chunk of work will be in RestaurantManagementSystem to set up the queues and connect all of the classes and objects to create the finalized product.
