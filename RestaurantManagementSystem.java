@@ -234,16 +234,16 @@ public class RestaurantManagementSystem{
             frame.getContentPane().add(pane);
             frame.setVisible(true);
             /** Details @Hannah
-              * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
-              * quantity of food item.
-              * a "Total" button under each table tab that shows the total of the order.
-              * and a "View Order" button under each table tab that that displays the current order.
-              */
+             * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
+             * quantity of food item.
+             * a "Total" button under each table tab that shows the total of the order.
+             * and a "View Order" button under each table tab that that displays the current order.
+             */
         }
     }
 
     private static class TablePanel extends JPanel {
-
+      @SuppressWarnings("unchecked")
         public TablePanel(Integer tableNum) {
 
             JButton jb = new JButton("Add item to order");
@@ -252,10 +252,17 @@ public class RestaurantManagementSystem{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         for(int i = 0; i<tablesArray.size();i++){
+                          Table table = tablesArray.get(i);
                             if(tablesArray.get(i).getAvail()){
                                 addToOrder(i+1);
                                 tablesArray.get(i).setAvail(false);
-                            }   
+                            }
+                            String[] list = new String[tablesArray.get(i).getOrders().getOrder().size()];
+                            for(int j=0;j<list.length;j++){
+                              list[j] = table.getOrders().getOrder().get(j).getName();
+                            }
+                            JList temp = new JList(list);
+                            add(temp);
                         }
                     }
                 }
@@ -265,7 +272,7 @@ public class RestaurantManagementSystem{
         }
     }
     private static class KitchenPanel extends JPanel {
-
+      @SuppressWarnings("unchecked")
         public KitchenPanel() {
 
             JButton jb2 = new JButton("Complete Order");
@@ -275,12 +282,26 @@ public class RestaurantManagementSystem{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Order order = toKitchen.poll();
+                        String[] foods = new String[order.getOrder().size()];
+                        for(int i = 0; i<order.getOrder().size();i++)
+                            foods[i] = order.getOrder().get(i).getName();
+                        JList food = new JList(foods);
+                        add(food);
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
                     }
                 }
             );
             add(new JLabel("This is the Kitchen"));
+            /*Order test = new Order(1);
+            test.addFood(new MenuItem("Spaghetti",11,"Food"));
+            test.addFood(new MenuItem("Baguette",11,"Food"));
+            test.addFood(new MenuItem("Pineapple",11,"Food"));
+            String[] foods = new String[test.getOrder().size()];
+            for(int i = 0; i<test.getOrder().size();i++)
+                foods[i] = test.getOrder().get(i).getName();
+            JList food = new JList(foods);*/
             add(jb2);
+            //add(food);
         }
     }
 }
