@@ -139,9 +139,24 @@ public class RestaurantManagementSystem{
 
     public static void addToOrder(int tableNumber){
         Order order = new Order(tableNumber);
-        JTextArea  JTA = new JTextArea(menu.toString());
+        JFrame menuBox = new JFrame("Menu");
+
+        menuBox.setLayout(new GridLayout(1,1));
+        menuBox.setLocationRelativeTo(null);
+        menuBox.setPreferredSize(new Dimension(600,1200));
+        menuBox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuBox.pack();
+
+        menuBox.setVisible(true);
+
+        String menuText = "";
+        for(int i = 0; i<menu.size();i++)
+            menuText += menu.get(i).getName()+"\n";
+
+        JTextArea  JTA = new JTextArea(menuText);
         JPanel jp = new JPanel();
         jp.add(JTA);
+        menuBox.add(jp);
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
             if(a.getName().equals(tempO)){
@@ -251,16 +266,18 @@ public class RestaurantManagementSystem{
             jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        boolean found = false;
                         for(int i = 0; i<tablesArray.size();i++){
-                            if(tablesArray.get(i).getAvail()){
+                            if(tablesArray.get(i).getAvail()&&found==false  ){
                                 addToOrder(i+1);
                                 tablesArray.get(i).setAvail(false);
+                                found = true;
                             }   
                         }
                     }
                 }
             );
-            add(new JLabel("This is table "+tableNum));
+            add(new JLabel("This is Table "+tableNum));
             add(jb);
         }
     }
@@ -281,6 +298,7 @@ public class RestaurantManagementSystem{
                         JList food = new JList(foods);
                         add(food);
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
+                        revalidate();
                     }
                 }
             );
@@ -291,7 +309,7 @@ public class RestaurantManagementSystem{
             test.addFood(new MenuItem("Pineapple",11,"Food"));
             String[] foods = new String[test.getOrder().size()];
             for(int i = 0; i<test.getOrder().size();i++)
-                foods[i] = test.getOrder().get(i).getName();
+            foods[i] = test.getOrder().get(i).getName();
             JList food = new JList(foods);*/
             add(jb2);
             //add(food);
