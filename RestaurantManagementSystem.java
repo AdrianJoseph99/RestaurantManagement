@@ -140,8 +140,6 @@ public class RestaurantManagementSystem{
     public static void addToOrder(int tableNumber){
 
         Order order = tablesArray.get(tableNumber-1).getOrder();
-        if(order==null)
-            order = new Order(tableNumber+1);
 
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
@@ -149,8 +147,8 @@ public class RestaurantManagementSystem{
                 order.addFood(a);
             }
         }
-        tablesArray.get(tableNumber-1).setOrder(order);
-
+        //tablesArray.get(tableNumber-1).setOrder(order);
+        //order.printOrder();
     }
 
     public static void main(String[] args){
@@ -200,8 +198,6 @@ public class RestaurantManagementSystem{
             menuBox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             menuBox.pack();
 
-            menuBox.setVisible(true);
-
             String menuText = "";
             for(int i = 0; i<menu.size();i++)
                 menuText += menu.get(i).getName()+"\n";
@@ -211,6 +207,7 @@ public class RestaurantManagementSystem{
             jp.add(JTA);
             menuBox.add(jp);
 
+            menuBox.setVisible(true);
             frame.setVisible(true);
             /*
             JButton jb = new JButton("Add item to order");
@@ -234,6 +231,7 @@ public class RestaurantManagementSystem{
             //JTabbedPane pane = new JTabbedPane();
             for(int i=0;i<tablesArray.size();i++){
                 String temp = "Table "+Integer.toString(i+1);
+                tablesArray.get(i).setOrder((new Order(i+1)));
                 //pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
                 pane.addTab(temp,new TablePanel(i+1));
             }
@@ -272,27 +270,30 @@ public class RestaurantManagementSystem{
             jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        boolean found = false;
-                        for(int i = 0; i<tablesArray.size();i++){
-                            if(tablesArray.get(i).getAvail()&&found==false  ){
-                                addToOrder(i+1);
-                                tablesArray.get(i).setAvail(false);
-                                found = true;
-                            }   
-                        }
-                    }
+                        if(tablesArray.get(tableNum-1).getAvail())
+                            addToOrder(tableNum);
+                    }   
+
                 }
             );
             jb2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         toKitchen.add(tablesArray.get(tableNum-1).getOrder());
-                        
+                        tablesArray.get(tableNum-1).setAvail(false);
+                        String foods = "";
+                        for(int i = 0; i<tablesArray.get(tableNum-1).getOrder().getOrder().size();i++)
+                            foods += tablesArray.get(tableNum-1).getOrder().getOrder().get(i).getName()+"\n";
+                        JTextField food = new JTextField(foods);
+                        add(food);
+                        revalidate();
                     }
                 }
             );
             add(new JLabel("This is Table "+tableNum));
+
             add(jb);
+
             add(jb2);   
         }
     }
@@ -307,10 +308,11 @@ public class RestaurantManagementSystem{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Order order = toKitchen.poll();
-                        String[] foods = new String[order.getOrder().size()];
+
+                        String foods = "";
                         for(int i = 0; i<order.getOrder().size();i++)
-                            foods[i] += order.getOrder().get(i).getName();
-                        JList food = new JList(foods);
+                            foods += order.getOrder().get(i).getName()+"\n";
+                        JTextField food = new JTextField(foods);
                         add(food);
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
                         revalidate();
