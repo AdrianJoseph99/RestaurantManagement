@@ -137,8 +137,8 @@ public class RestaurantManagementSystem{
     //drinks vs foods?
     }*/
 
-    public void getFromKitchen(){
-        toKitchen.poll();
+    public static Order getFromKitchen(){
+        return toKitchen.poll();
     }
 
     public static void addToOrder(int tableNumber){
@@ -195,6 +195,52 @@ public class RestaurantManagementSystem{
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
             frame.setVisible(true);
+            /*
+            JButton jb = new JButton("Add item to order");
+            jb.setBounds(140,100,120,40);
+            jb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            for(int i = 0; i<tablesArray.size();i++){
+            if(tablesArray.get(i).getAvail()){
+            addToOrder(i+1);
+            tablesArray.get(i).setAvail(false);
+            }   
+            }
+            }
+            });*/
+            //add the tables as tabs
+            JTabbedPane pane = new JTabbedPane();
+            JPanel panel = new JPanel();
+            //panel.add(jb);
+            //add the tables as tabs
+            //JTabbedPane pane = new JTabbedPane();
+            for(int i=0;i<tablesArray.size();i++){
+                String temp = "Table "+Integer.toString(i+1);
+                //pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
+                pane.addTab(temp,new TablePanel(i+1));
+            }
+            //pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
+            pane.addTab("Kitchen", new KitchenPanel());
+            /*JButton jb2 = new JButton("Complete Order");
+            jb2.setBounds(140,100,120,40);
+            //panel.add(jb2,BorderLayout.CENTER);
+            panel.add(jb2);
+            jb2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            Order order = getFromKitchen();
+            tablesArray.get(order.getTableNumber()-1).setAvail(true);
+            }
+            });*/
+
+            frame.getContentPane().add(pane);
+        }
+    }
+
+    private static class TablePanel extends JPanel {
+
+        public TablePanel(Integer tableNum) {
 
             JButton jb = new JButton("Add item to order");
             jb.setBounds(140,100,120,40);
@@ -203,30 +249,34 @@ public class RestaurantManagementSystem{
                     public void actionPerformed(ActionEvent e) {
                         for(int i = 0; i<tablesArray.size();i++){
                             if(tablesArray.get(i).getAvail()){
-                                addToOrder(i);
+                                addToOrder(i+1);
                                 tablesArray.get(i).setAvail(false);
-                            }
+                            }   
                         }
                     }
-                });
-            //add the tables as tabs
-            JTabbedPane pane = new JTabbedPane();
-            JPanel panel = new JPanel();
-            panel.add(jb);
-            //add the tables as tabs
-            //JTabbedPane pane = new JTabbedPane();
-            for(int i=0;i<tablesArray.size();i++){
-                String temp = "Table "+Integer.toString(i+1);
-                pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
-            }
-            pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
-            frame.getContentPane().add(pane);
-            /** Details @Hannah
-              * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
-              * quantity of food item.
-              * a "Total" button under each table tab that shows the total of the order.
-              * and a "View Order" button under each table tab that that displays the current order.
-              */
+                }
+            );
+            add(new JLabel("This is table "+tableNum));
+            add(jb);
+        }
+    }
+    private static class KitchenPanel extends JPanel {
+
+        public KitchenPanel() {
+
+            JButton jb2 = new JButton("Complete Order");
+            jb2.setBounds(140,100,120,40);
+            //panel.add(jb2,BorderLayout.CENTER);
+            jb2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Order order = getFromKitchen();
+                        tablesArray.get(order.getTableNumber()-1).setAvail(true);
+                    }
+                }
+            );
+            add(new JLabel("This is the Kitchen"));
+            add(jb2);
         }
     }
 }
