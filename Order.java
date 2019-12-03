@@ -35,7 +35,7 @@ public class Order {
     return this.order;
   }
   
-  public void addMenuItem(MenuItem item) {
+  public void addFood(MenuItem item) {
     order.add(item);
   }
   public void removeMenuItem(MenuItem item) {
