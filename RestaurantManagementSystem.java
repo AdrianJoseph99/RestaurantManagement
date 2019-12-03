@@ -74,6 +74,14 @@ public class RestaurantManagementSystem{
         String fName = JOptionPane.showInputDialog("First Name");
         String lName = JOptionPane.showInputDialog("Last Name");
         int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
+        while(!(empPW > 999 && empPW < 10000)){
+            try{
+                empPW = Integer.parseInt(JOptionPane.showInputDialog("please enter valid pin of 4 digits"));
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
+                empPW = 0;
+            }
         Server temp = new Server(empPW, fName, lName);
         servers.add(temp);
     }
@@ -82,6 +90,14 @@ public class RestaurantManagementSystem{
         String fName = JOptionPane.showInputDialog("First Name?");
         String LName = JOptionPane.showInputDialog("Last Name?");
         int manPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
+        while(!(manPW > 999 && manPW < 10000)){
+            try{
+                manPW = Integer.parseInt(JOptionPane.showInputDialog("please enter valid pin of 4 digits"));
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
+                manPW = 0;
+            }
         String masterP = JOptionPane.showInputDialog("enter the master password");
         while(Integer.parseInt(masterP) != masterPassW){
             masterP = JOptionPane.showInputDialog("the master password is incorrect, please enter a valid password or press q to quit");
@@ -97,6 +113,14 @@ public class RestaurantManagementSystem{
         String fName = JOptionPane.showInputDialog("First Name");
         String lName = JOptionPane.showInputDialog("Last Name");
         int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
+        while(!(empPW > 999 && empPW < 10000)){
+            try{
+                empPW = Integer.parseInt(JOptionPane.showInputDialog("please enter valid pin of 4 digits"));
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
+                empPW = 0;
+            }
         Chef temp = new Chef(empPW, fName, lName);
         chefs.add(temp);
     }
