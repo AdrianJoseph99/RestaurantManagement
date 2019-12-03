@@ -275,21 +275,26 @@ public class RestaurantManagementSystem{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Order order = toKitchen.poll();
+                        String[] foods = new String[order.getOrder().size()];
+                        for(int i = 0; i<order.getOrder().size();i++)
+                            foods[i] = order.getOrder().get(i).getName();
+                        JList food = new JList(foods);
+                        add(food);
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
                     }
                 }
             );
             add(new JLabel("This is the Kitchen"));
-            Order test = new Order(1);
+            /*Order test = new Order(1);
             test.addFood(new MenuItem("Spaghetti",11,"Food"));
             test.addFood(new MenuItem("Baguette",11,"Food"));
             test.addFood(new MenuItem("Pineapple",11,"Food"));
             String[] foods = new String[test.getOrder().size()];
             for(int i = 0; i<test.getOrder().size();i++)
                 foods[i] = test.getOrder().get(i).getName();
-            JList food = new JList(foods);
+            JList food = new JList(foods);*/
             add(jb2);
-            add(food);
+            //add(food);
         }
     }
 }
