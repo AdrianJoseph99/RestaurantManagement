@@ -41,7 +41,7 @@ public class Order {
   public void removeFood(MenuItem item) {
     order.remove(item);
   }
-  public void printOrder(ArrayList<MenuItem> order) {
+  public void printOrder() {
     String name;
     double cost;
     for (MenuItem item : order) {
