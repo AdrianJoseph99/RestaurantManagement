@@ -234,11 +234,11 @@ public class RestaurantManagementSystem{
             frame.getContentPane().add(pane);
             frame.setVisible(true);
             /** Details @Hannah
-              * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
-              * quantity of food item.
-              * a "Total" button under each table tab that shows the total of the order.
-              * and a "View Order" button under each table tab that that displays the current order.
-              */
+             * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
+             * quantity of food item.
+             * a "Total" button under each table tab that shows the total of the order.
+             * and a "View Order" button under each table tab that that displays the current order.
+             */
         }
     }
 
@@ -280,7 +280,16 @@ public class RestaurantManagementSystem{
                 }
             );
             add(new JLabel("This is the Kitchen"));
+            Order test = new Order(1);
+            test.addFood(new MenuItem("Spaghetti",11,"Food"));
+            test.addFood(new MenuItem("Baguette",11,"Food"));
+            test.addFood(new MenuItem("Pineapple",11,"Food"));
+            String[] foods = new String[test.getOrder().size()];
+            for(int i = 0; i<test.getOrder().size();i++)
+                foods[i] = test.getOrder().get(i).getName();
+            JList food = new JList(foods);
             add(jb2);
+            add(food);
         }
     }
 }
