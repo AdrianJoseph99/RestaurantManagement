@@ -139,9 +139,9 @@ public class RestaurantManagementSystem{
 
     public static void addToOrder(int tableNumber){
         Order order = new Order(tableNumber);
-        JTextArea  JTA = new JTextArea(menu.toString());
+        /*JTextArea  JTA = new JTextArea(menu.toString());
         JPanel jp = new JPanel();
-        jp.add(JTA);
+        jp.add(JTA);*/
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
             if(a.getName().equals(tempO)){
@@ -149,6 +149,9 @@ public class RestaurantManagementSystem{
             }
         }
         toKitchen.add(order);
+        Table temp = new Table(5,tableNumber);
+        temp.setOrder(order);
+        tablesArray.add(temp);
 
     }
 
