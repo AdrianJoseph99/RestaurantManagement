@@ -164,6 +164,7 @@ public class RestaurantManagementSystem{
             }
         }
         toKitchen.add(order);
+        tablesArray.get(tableNumber-1).setOrder(order);
 
     }
 
