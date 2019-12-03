@@ -51,7 +51,26 @@ public class RestaurantManagementSystem{
     }
 
     public void addServer(){
-        
+        /*JFrame server = new JFrame("Server");
+        JTextField fName = new JTextField("First Name");
+        JTextField lName = new JTextField("Last Name");
+        JTextField empPW = new JTextField("4 digit pin");
+        JButton submit = new JButton("Submit");
+        server.add(fName);
+        server.add(lName);
+        server.add(empPW);
+        server.add(submit);
+        server.setLayout(new FlowLayout());
+        server.setSize(300,300);
+        server.setVisible(true);
+        submit.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+        if(e.getSource() == submit){
+        Server temp = new Server(Integer.parseInt(empPW.getText()), fName.getText(), lName.getText());
+        servers.add(temp);
+        }
+        }
+        });*/
         String fName = JOptionPane.showInputDialog("First Name");
         String lName = JOptionPane.showInputDialog("Last Name");
         int empPW = Integer.parseInt(JOptionPane.showInputDialog("input a pin of 4 digits"));
@@ -113,11 +132,16 @@ public class RestaurantManagementSystem{
         return false;
     }
 
+    /*  
+    public void sendToKitchen(){
+    //drinks vs foods?
+    }*/
+
     public static void addToOrder(int tableNumber){
         Order order = new Order(tableNumber);
-        /*JTextArea  JTA = new JTextArea(menu.toString());
+        JTextArea  JTA = new JTextArea(menu.toString());
         JPanel jp = new JPanel();
-        jp.add(JTA);*/
+        jp.add(JTA);
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
             if(a.getName().equals(tempO)){
@@ -125,9 +149,6 @@ public class RestaurantManagementSystem{
             }
         }
         toKitchen.add(order);
-        Table temp = new Table(5,tableNumber);
-        temp.setOrder(order);
-        tablesArray.add(temp);
 
     }
 
@@ -171,15 +192,45 @@ public class RestaurantManagementSystem{
             frame.pack();
 
             frame.setVisible(true);
-            
+            /*
+            JButton jb = new JButton("Add item to order");
+            jb.setBounds(140,100,120,40);
+            jb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            for(int i = 0; i<tablesArray.size();i++){
+            if(tablesArray.get(i).getAvail()){
+            addToOrder(i+1);
+            tablesArray.get(i).setAvail(false);
+            }   
+            }
+            }
+            });*/
+            //add the tables as tabs
             JTabbedPane pane = new JTabbedPane();
             JPanel panel = new JPanel();
+            //panel.add(jb);
+            //add the tables as tabs
+            //JTabbedPane pane = new JTabbedPane();
             for(int i=0;i<tablesArray.size();i++){
                 String temp = "Table "+Integer.toString(i+1);
+                //pane.addTab(temp, new JLabel("This is table "+Integer.toString(i+1)));
                 pane.addTab(temp,new TablePanel(i+1));
             }
-             pane.addTab("Kitchen", new KitchenPanel());
-           
+            //pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
+            pane.addTab("Kitchen", new KitchenPanel());
+            /*JButton jb2 = new JButton("Complete Order");
+            jb2.setBounds(140,100,120,40);
+            //panel.add(jb2,BorderLayout.CENTER);
+            panel.add(jb2);
+            jb2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            Order order = getFromKitchen();
+            tablesArray.get(order.getTableNumber()-1).setAvail(true);
+            }
+            });*/
+
             frame.getContentPane().add(pane);
             frame.setVisible(true);
             /** Details @Hannah
@@ -192,7 +243,7 @@ public class RestaurantManagementSystem{
     }
 
     private static class TablePanel extends JPanel {
-      @SuppressWarnings("unchecked")
+
         public TablePanel(Integer tableNum) {
 
             JButton jb = new JButton("Add item to order");
@@ -201,17 +252,10 @@ public class RestaurantManagementSystem{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         for(int i = 0; i<tablesArray.size();i++){
-                          Table table = tablesArray.get(i);
                             if(tablesArray.get(i).getAvail()){
                                 addToOrder(i+1);
                                 tablesArray.get(i).setAvail(false);
-                            }
-                            String[] list = new String[tablesArray.get(i).getOrder().getOrder().size()];
-                            for(int j=0;j<list.length;j++){
-                              list[j] = table.getOrder().getOrder().get(j).getName();
-                            }
-                            JList temp = new JList(list);
-                            add(temp);
+                            }   
                         }
                     }
                 }
@@ -221,11 +265,12 @@ public class RestaurantManagementSystem{
         }
     }
     private static class KitchenPanel extends JPanel {
-      @SuppressWarnings("unchecked")
+
         public KitchenPanel() {
 
             JButton jb2 = new JButton("Complete Order");
             jb2.setBounds(140,100,120,40);
+            //panel.add(jb2,BorderLayout.CENTER);
             jb2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
