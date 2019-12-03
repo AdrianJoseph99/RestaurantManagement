@@ -300,9 +300,7 @@ public class RestaurantManagementSystem{
                                       }
                                   }
             );
-            add(new JLabel("This is Table "+tableNum+"."),SwingConstants.CENTER);
-
-            add(new JLabel("It can seat "+tablesArray.get(tableNum-1).getSeats()+" people."),SwingConstants.CENTER);
+            add(new JLabel("This is Table "+tableNum+". It can seat "+tablesArray.get(tableNum-1).getSeats()+" people."),SwingConstants.CENTER);
             jb.setHorizontalAlignment(SwingConstants.RIGHT);
             jb2.setVerticalAlignment(SwingConstants.BOTTOM);
 
