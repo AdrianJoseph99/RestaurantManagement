@@ -82,6 +82,7 @@ public class RestaurantManagementSystem{
                 JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
                 empPW = 0;
             }
+        }
         Server temp = new Server(empPW, fName, lName);
         servers.add(temp);
     }
@@ -98,6 +99,7 @@ public class RestaurantManagementSystem{
                 JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
                 manPW = 0;
             }
+        }
         String masterP = JOptionPane.showInputDialog("enter the master password");
         while(Integer.parseInt(masterP) != masterPassW){
             masterP = JOptionPane.showInputDialog("the master password is incorrect, please enter a valid password or press q to quit");
@@ -121,6 +123,7 @@ public class RestaurantManagementSystem{
                 JOptionPane.showMessageDialog(null,"ERROR: please use 4 integers to build your pin");
                 empPW = 0;
             }
+        }
         Chef temp = new Chef(empPW, fName, lName);
         chefs.add(temp);
     }
