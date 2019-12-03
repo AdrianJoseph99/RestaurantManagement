@@ -149,7 +149,7 @@ public class RestaurantManagementSystem{
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
             if(a.getName().equals(tempO)){
-                order.add(a);
+                order.addFood(a);
             }
         }
         toKitchen.add(order);
