@@ -257,9 +257,9 @@ public class RestaurantManagementSystem{
                                 addToOrder(i+1);
                                 tablesArray.get(i).setAvail(false);
                             }
-                            String[] list = new String[tablesArray.get(i).getOrders().getOrder().size()];
+                            String[] list = new String[tablesArray.get(i).getOrder().getOrder().size()];
                             for(int j=0;j<list.length;j++){
-                              list[j] = table.getOrders().getOrder().get(j).getName();
+                              list[j] = table.getOrder().getOrder().get(j).getName();
                             }
                             JList temp = new JList(list);
                             add(temp);
