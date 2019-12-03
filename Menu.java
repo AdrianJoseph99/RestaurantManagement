@@ -39,4 +39,11 @@ public class Menu
             total+=fud.getPrice();
         return total;
     }
+
+    @Override public String toString(){
+        String a = "";
+        for(MenuItem fud:menu)
+            a+=fud.getName()+"\n";
+        return a;
+    }
 }

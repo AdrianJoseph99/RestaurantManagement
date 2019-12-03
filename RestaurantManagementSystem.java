@@ -138,32 +138,17 @@ public class RestaurantManagementSystem{
     }*/
 
     public static void addToOrder(int tableNumber){
-        Order order = new Order(tableNumber);
-        JFrame menuBox = new JFrame("Menu");
 
-        menuBox.setLayout(new GridLayout(1,1));
-        menuBox.setLocationRelativeTo(null);
-        menuBox.setPreferredSize(new Dimension(600,1200));
-        menuBox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuBox.pack();
+        Order order = tablesArray.get(tableNumber-1).getOrder();
+        if(order==null)
+            order = new Order(tableNumber+1);
 
-        menuBox.setVisible(true);
-
-        String menuText = "";
-        for(int i = 0; i<menu.size();i++)
-            menuText += menu.get(i).getName()+"\n";
-
-        JTextArea  JTA = new JTextArea(menuText);
-        JPanel jp = new JPanel();
-        jp.add(JTA);
-        menuBox.add(jp);
         String tempO = JOptionPane.showInputDialog("Enter an item name from the menu");
         for(MenuItem a : menu){
             if(a.getName().equals(tempO)){
                 order.addFood(a);
             }
         }
-        toKitchen.add(order);
         tablesArray.get(tableNumber-1).setOrder(order);
 
     }
@@ -206,6 +191,25 @@ public class RestaurantManagementSystem{
             frame.setPreferredSize(new Dimension(600,400));
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
+
+            JFrame menuBox = new JFrame("Menu");
+
+            menuBox.setLayout(new GridLayout(1,1));
+            menuBox.setLocationRelativeTo(null);
+            menuBox.setPreferredSize(new Dimension(600,1200));
+            menuBox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            menuBox.pack();
+
+            menuBox.setVisible(true);
+
+            String menuText = "";
+            for(int i = 0; i<menu.size();i++)
+                menuText += menu.get(i).getName()+"\n";
+
+            JTextArea  JTA = new JTextArea(menuText);
+            JPanel jp = new JPanel();
+            jp.add(JTA);
+            menuBox.add(jp);
 
             frame.setVisible(true);
             /*
@@ -263,6 +267,7 @@ public class RestaurantManagementSystem{
         public TablePanel(Integer tableNum) {
 
             JButton jb = new JButton("Add item to order");
+            JButton jb2 = new JButton("Complete Order");
             jb.setBounds(140,100,120,40);
             jb.addActionListener(new ActionListener() {
                     @Override
@@ -278,15 +283,24 @@ public class RestaurantManagementSystem{
                     }
                 }
             );
+            jb2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        toKitchen.add(tablesArray.get(tableNum-1).getOrder());
+                        
+                    }
+                }
+            );
             add(new JLabel("This is Table "+tableNum));
             add(jb);
+            add(jb2);   
         }
     }
     private static class KitchenPanel extends JPanel {
 
         public KitchenPanel() {
 
-            JButton jb2 = new JButton("Complete Order");
+            JButton jb2 = new JButton("Deliver Order");
             jb2.setBounds(140,100,120,40);
             //panel.add(jb2,BorderLayout.CENTER);
             jb2.addActionListener(new ActionListener() {
@@ -295,7 +309,7 @@ public class RestaurantManagementSystem{
                         Order order = toKitchen.poll();
                         String[] foods = new String[order.getOrder().size()];
                         for(int i = 0; i<order.getOrder().size();i++)
-                            foods[i] = order.getOrder().get(i).getName();
+                            foods[i] += order.getOrder().get(i).getName();
                         JList food = new JList(foods);
                         add(food);
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
