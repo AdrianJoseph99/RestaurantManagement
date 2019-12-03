@@ -33,7 +33,7 @@ public class RestaurantManagementSystem{
         tablesArray = new ArrayList<Table>(tables);
         for(int i=0;i<tables;i++){
             int seats = Integer.parseInt(JOptionPane.showInputDialog("How many seats will be available for table "+(i+1)+"?"));
-            Table obj = new Table(i+1,seats);
+            Table obj = new Table(seats,i+1);
             tablesArray.add(obj);
         }
         int numManagers = Integer.parseInt(JOptionPane.showInputDialog("How many managers have you hired?"));
@@ -217,29 +217,11 @@ public class RestaurantManagementSystem{
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
 
-            JFrame menuBox = new JFrame("Menu");
-
-            menuBox.setLayout(new GridLayout(1,1));
-            menuBox.setLocationRelativeTo(null);
-            menuBox.setPreferredSize(new Dimension(300,300));
-            menuBox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            menuBox.pack();
-
-            String menuText = "Food Item: \t\t Price:\n";
-            for(MenuItem a : menu){
-                menuText += a.getName() + "\t\t$" + a.getPrice() + "\n";
-            }
-
-            JTextArea  JTA = new JTextArea(menuText);
-            JPanel jp = new JPanel();
-            jp.add(JTA);
-            menuBox.add(jp);
-
-            menuBox.setVisible(true);
+         
             frame.setVisible(true);
             /*
             JButton jb = new JButton("Add item to order");
-            jb.setBounds(140,100,120,40);
+            jb.setBounds(200,100,120,40);
             jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -294,7 +276,7 @@ public class RestaurantManagementSystem{
 
             JButton jb = new JButton("Add item to order");
             JButton jb2 = new JButton("Complete Order");
-            jb.setBounds(140,100,120,40);
+            jb.setBounds(200,100,120,40);
             jb.addActionListener(new ActionListener() {
                                      @Override
                                      public void actionPerformed(ActionEvent e) {
@@ -318,11 +300,25 @@ public class RestaurantManagementSystem{
                                       }
                                   }
             );
-            add(new JLabel("This is Table "+tableNum));
+            add(new JLabel("This is Table "+tableNum+"."),SwingConstants.CENTER);
+
+            add(new JLabel("It can seat "+tablesArray.get(tableNum-1).getSeats()+" people."),SwingConstants.CENTER);
+            jb.setHorizontalAlignment(SwingConstants.RIGHT);
+            jb2.setVerticalAlignment(SwingConstants.BOTTOM);
 
             add(jb);
 
             add(jb2);
+            
+            String menuText = "Food Item: \t\t Price:\n";
+            for(MenuItem a : menu){
+                menuText += a.getName() + "\t\t$" + a.getPrice() + "\n";
+            }
+
+            JTextArea  JTA = new JTextArea(menuText);
+            JPanel jp = new JPanel();
+            jp.add(JTA);
+            add(jp);
         }
     }
     private static class KitchenPanel extends JPanel {
@@ -347,7 +343,7 @@ public class RestaurantManagementSystem{
                                       }
                                   }
             );
-            add(new JLabel("This is the Kitchen"));
+            add(new JLabel("This is the Kitchen."));
             /*Order test = new Order(1);
             test.addFood(new MenuItem("Spaghetti",11,"Food"));
             test.addFood(new MenuItem("Baguette",11,"Food"));
