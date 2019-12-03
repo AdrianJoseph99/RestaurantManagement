@@ -137,10 +137,6 @@ public class RestaurantManagementSystem{
     //drinks vs foods?
     }*/
 
-    public static Order getFromKitchen(){
-        return toKitchen.poll();
-    }
-
     public static void addToOrder(int tableNumber){
         Order order = new Order(tableNumber);
         JTextArea  JTA = new JTextArea(menu.toString());
@@ -270,7 +266,7 @@ public class RestaurantManagementSystem{
             jb2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Order order = getFromKitchen();
+                        Order order = toKitchen.poll();
                         tablesArray.get(order.getTableNumber()-1).setAvail(true);
                     }
                 }
