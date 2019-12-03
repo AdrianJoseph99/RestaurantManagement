@@ -38,7 +38,7 @@ public class Order {
   public void addFood(MenuItem item) {
     order.add(item);
   }
-  public void removeMenuItem(MenuItem item) {
+  public void removeFood(MenuItem item) {
     order.remove(item);
   }
   public void printOrder(ArrayList<MenuItem> order) {
