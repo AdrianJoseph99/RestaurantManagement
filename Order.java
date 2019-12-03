@@ -4,7 +4,7 @@ import java.util.*;
 public class Order {
  
   protected int tableNumber;
-  protected ArrayList<MenuItem> order;
+  protected ArrayList<MenuItem> order = new ArrayList<MenuItem>();
   protected Calendar timeOfOrder;
   
   public Order(int tableNumber) {
