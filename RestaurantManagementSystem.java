@@ -194,7 +194,6 @@ public class RestaurantManagementSystem{
             frame.setPreferredSize(new Dimension(600,400));
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
-            frame.setVisible(true);
 
             JButton jb = new JButton("Add item to order");
             jb.setBounds(140,100,120,40);
@@ -221,6 +220,7 @@ public class RestaurantManagementSystem{
             }
             pane.add("Kitchen", new JLabel("This is the Kitchen")); //we'll send all the queues to show up in this tab
             frame.getContentPane().add(pane);
+            frame.setVisible(true);
             /** Details @Hannah
               * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
               * quantity of food item.
