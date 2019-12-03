@@ -190,6 +190,7 @@ public class RestaurantManagementSystem{
             frame.setPreferredSize(new Dimension(600,400));
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
+
             frame.setVisible(true);
             /*
             JButton jb = new JButton("Add item to order");
@@ -231,6 +232,13 @@ public class RestaurantManagementSystem{
             });*/
 
             frame.getContentPane().add(pane);
+            frame.setVisible(true);
+            /** Details @Hannah
+              * an "Order Food" button under each table tab that opens the menu and has a way for you to select the
+              * quantity of food item.
+              * a "Total" button under each table tab that shows the total of the order.
+              * and a "View Order" button under each table tab that that displays the current order.
+              */
         }
     }
 
